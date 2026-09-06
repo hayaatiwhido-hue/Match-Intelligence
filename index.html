@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070b12" />
+  <title>FF Match Intelligence</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">FF</div><div><strong>Match Intelligence</strong><span>v1.0.2</span></div></div>
+      <nav>
+        <button class="nav-item active" data-view="single">Partida única</button>
+        <button class="nav-item" data-view="matches">Tabela de partidas</button>
+        <button class="nav-item" data-view="players">Registros de jogadores</button>
+        <button class="nav-item" data-view="teams">Nomes das equipes</button>
+      </nav>
+      <div class="side-note">Leitura por navegador automatizado do MatchStats. Nenhuma API interna é usada.</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">FF ESPORTS / MATCHSTATS</p><h1 id="pageTitle">Partida única</h1></div>
+        <div id="liveBadge" class="status-pill hidden"><i></i> Partida Ao Vivo</div>
+      </header>
+
+      <section id="singleView" class="view active-view">
+        <div class="card hero-card">
+          <div class="card-title"><div><h2>Pesquisar Replay</h2><p>Cole o nome completo do arquivo ReplayInfo.</p></div><span class="chip">Browser extraction</span></div>
+          <div class="search-row"><input id="replayInput" placeholder="ReplayInfo_2092648827601866752_2026-08-26-13-22-14.json" autocomplete="off" /><button id="searchBtn" class="primary">Pesquisar partida</button></div>
+          <div class="match-url" id="matchUrl"></div>
+          <div id="progress" class="progress hidden"><div class="spinner"></div><span id="progressText">Abrindo o MatchStats...</span></div>
+          <div id="errorBox" class="error hidden"></div>
+        </div>
+        <div id="summary" class="summary-grid"></div>
+        <div id="teamSection" class="card data-card hidden"><div class="card-title"><div><h2>Informações das Equipes</h2><p>Dados lidos diretamente da tabela renderizada.</p></div><button class="ghost" id="addCurrentMatch">Adicionar MatchID à tabela</button></div><div class="table-wrap"><table id="teamTable"></table></div></div>
+        <div id="playerSection" class="card data-card hidden"><div class="card-title"><div><h2>Player Data</h2><p>Nicknames registrados substituem o nick usado na partida.</p></div></div><div class="table-wrap"><table id="playerTable"></table></div></div>
+      </section>
+
+      <section id="matchesView" class="view"><div class="card"><div class="card-title"><div><h2>Partidas salvas</h2><p>Adicione MatchIDs e consolide as equipes automaticamente.</p></div><button class="primary" id="refreshSaved">Atualizar tudo</button></div><div class="add-match-row"><input id="matchIdInput" placeholder="MatchID"/><button class="primary" id="addMatchBtn">Adicionar</button></div><div id="savedMatches" class="match-list"></div></div><div class="card data-card"><div class="card-title"><div><h2>Tabela geral</h2><p>Equipes equivalentes são agrupadas e todas as estatísticas numéricas são somadas.</p></div></div><div class="table-wrap"><table id="aggregateTable"></table></div></div></section>
+
+      <section id="playersView" class="view"><div class="card"><div class="card-title"><div><h2>Registros dos jogadores</h2><p>Use ID + nickname do evento + função.</p></div></div><div class="player-form"><input id="regId" placeholder="Player ID"/><input id="regNick" placeholder="Nickname registrado"/><input id="regRole" placeholder="Função (opcional)"/><button class="primary" id="savePlayer">Salvar registro</button></div><div class="table-wrap"><table id="registryTable"></table></div></div></section>
+
+      <section id="teamsView" class="view"><div class="card"><div class="card-title"><div><h2>Normalização de equipes</h2><p>Transforme várias grafias no mesmo nome oficial.</p></div></div><div class="team-form"><input id="oldTeam" placeholder="Nome atual / variação"/><input id="newTeam" placeholder="Nome novo / oficial"/><button class="primary" id="saveTeam">Atualizar nome</button></div><div id="aliasList" class="alias-list"></div></div></section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
