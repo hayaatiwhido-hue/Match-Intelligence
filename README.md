@@ -1,38 +1,36 @@
-# FF Match Intelligence — v1.0.2
+# FF Match Intelligence — v1.0.3
 
-Projeto completo em arquivos separados: HTML, CSS, JavaScript do navegador e servidor Node/TypeScript.
+Projeto completo, pronto para publicar pelo GitHub e importar na Vercel.
 
-## Fluxo
-1. O usuário cola o nome de um ReplayInfo.
-2. O navegador extrai o MatchID.
-3. O servidor abre `https://matchstats.us.ffesports.com/match?search=MatchID` em Chromium automatizado.
-4. O servidor procura visualmente o botão **View**, clica nele e lê as tabelas HTML renderizadas de Team Data e Player Data.
-5. Nenhuma API/endpoint interno do MatchStats é consultado.
+## O que esta versão faz
 
-A automação usa Puppeteer para navegar, localizar elementos e clicar na página renderizada.
+- Extrai o MatchID de nomes `ReplayInfo_ID_DATA.json`.
+- Abre o MatchStats com `match?search=MatchID` usando um navegador automatizado.
+- Clica no botão `View` da página real.
+- Lê as tabelas renderizadas de Team Data e Player Data.
+- Não consulta endpoint/API interna do MatchStats.
+- Mostra modo, formato, equipes e jogadores.
+- Permite salvar MatchIDs e consolidar equipes.
+- Permite cadastrar nickname de evento e função por Player ID.
+- Permite normalizar variações do nome das equipes.
+- Atualiza automaticamente a partida acompanhada.
+- Marca a partida como finalizada quando uma equipe chega a Survival Score 12.
+- Guarda os registros no navegador do usuário.
 
-## Arquivos
-- `index.html` — interface
-- `style.css` — visual
-- `app.js` — lógica da interface, registros, aliases, consolidação e atualização
-- `server.ts` — servidor e automação do navegador
-- `package.json` — dependências
-- `vercel.json` — configuração de função
+## Publicação pelo celular
 
-## Rodar localmente
-Requer Node.js 22+.
+1. Crie um repositório novo no GitHub.
+2. Abra o ZIP e envie **todos os arquivos que estão na raiz do projeto** para a raiz do repositório. Não coloque o ZIP dentro do repositório.
+3. No painel da Vercel, importe esse repositório do GitHub.
+4. Não preencha variáveis de ambiente, não escolha banco de dados e não altere comandos de build.
+5. Publique.
 
-```bash
-npm install
-npm start
-```
+O projeto usa `server.ts` na raiz. A Vercel atualmente detecta esse tipo de servidor Node automaticamente, sem exigir um framework separado.
 
-Abra `http://localhost:3000`.
+## Observação importante sobre o navegador
 
-Se tiver Chrome/Chromium instalado localmente e o pacote não conseguir localizar um executável, defina `PUPPETEER_EXECUTABLE_PATH` para o caminho do Chrome.
+A extração usa Chromium/Puppeteer no servidor para abrir o MatchStats como uma página normal, executar JavaScript, localizar o botão View e ler o conteúdo renderizado. Por isso, a primeira consulta pode levar alguns segundos enquanto o navegador inicia.
 
-## Hospedagem
-O projeto pode ser usado em uma infraestrutura Node que permita Chromium. Para uma implantação serverless, a função precisa ter memória/tempo suficientes para iniciar o navegador e carregar o MatchStats. A configuração deste pacote reserva 1024 MB e 60 segundos para a função.
+## Versão
 
-## Observação sobre atualização ao vivo
-A interface consulta a rota de extração a cada 1 segundo enquanto uma partida estiver aberta. Isso significa novas navegações ao MatchStats; não existe polling a cada 1 ms, pois seria impraticável para navegador automatizado e servidor.
+1.0.3

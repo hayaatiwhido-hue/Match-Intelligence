@@ -1,9 +1,9 @@
 {
-  "version": 2,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "server.ts": {
-      "maxDuration": 60,
-      "memory": 1024
+      "maxDuration": 300,
+      "includeFiles": ["node_modules/@sparticuz/chromium/**"]
     }
   }
 }
