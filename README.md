@@ -1,4 +1,4 @@
-# FF Match Intelligence v1.0.5
+# FF Match Intelligence v1.0.6
 
 Projeto em **um único núcleo de servidor**: não existe pasta `api/`.
 
@@ -21,4 +21,4 @@ A função de scraping usa Chromium serverless. A Vercel pode impor limites de d
 
 ## Versão
 
-1.0.5 — servidor consolidado em um único núcleo, sem pasta `api/`.
+1.0.6 — servidor consolidado em um único núcleo, sem pasta `api/`. O Chromium/Puppeteer agora é carregado somente quando uma consulta é feita, evitando que a página inicial caia por falha de importação do navegador.
