@@ -1,36 +1,24 @@
-# FF Match Intelligence — v1.0.3
+# FF Match Intelligence v1.0.5
 
-Projeto completo, pronto para publicar pelo GitHub e importar na Vercel.
+Projeto em **um único núcleo de servidor**: não existe pasta `api/`.
 
-## O que esta versão faz
+Arquivos principais:
+- `server.ts` — servidor, arquivos estáticos e rota `/api/scrape` no mesmo núcleo.
+- `index.html` — interface.
+- `style.css` — estilos.
+- `app.js` — lógica do navegador.
+- `package.json` — dependências.
 
-- Extrai o MatchID de nomes `ReplayInfo_ID_DATA.json`.
-- Abre o MatchStats com `match?search=MatchID` usando um navegador automatizado.
-- Clica no botão `View` da página real.
-- Lê as tabelas renderizadas de Team Data e Player Data.
-- Não consulta endpoint/API interna do MatchStats.
-- Mostra modo, formato, equipes e jogadores.
-- Permite salvar MatchIDs e consolidar equipes.
-- Permite cadastrar nickname de evento e função por Player ID.
-- Permite normalizar variações do nome das equipes.
-- Atualiza automaticamente a partida acompanhada.
-- Marca a partida como finalizada quando uma equipe chega a Survival Score 12.
-- Guarda os registros no navegador do usuário.
+## Deploy
 
-## Publicação pelo celular
+Envie todos os arquivos para a raiz de um repositório GitHub e importe o repositório na Vercel. O projeto usa o suporte atual da Vercel para detectar `server.ts` na raiz.
 
-1. Crie um repositório novo no GitHub.
-2. Abra o ZIP e envie **todos os arquivos que estão na raiz do projeto** para a raiz do repositório. Não coloque o ZIP dentro do repositório.
-3. No painel da Vercel, importe esse repositório do GitHub.
-4. Não preencha variáveis de ambiente, não escolha banco de dados e não altere comandos de build.
-5. Publique.
+## Importante
 
-O projeto usa `server.ts` na raiz. A Vercel atualmente detecta esse tipo de servidor Node automaticamente, sem exigir um framework separado.
+A consulta ao MatchStats é feita por automação de navegador: abre a URL `match?search=MatchID`, procura e clica no botão `View` e lê as tabelas renderizadas. Não existe integração com endpoint/API interna do MatchStats.
 
-## Observação importante sobre o navegador
-
-A extração usa Chromium/Puppeteer no servidor para abrir o MatchStats como uma página normal, executar JavaScript, localizar o botão View e ler o conteúdo renderizado. Por isso, a primeira consulta pode levar alguns segundos enquanto o navegador inicia.
+A função de scraping usa Chromium serverless. A Vercel pode impor limites de duração e recursos conforme o plano.
 
 ## Versão
 
-1.0.3
+1.0.5 — servidor consolidado em um único núcleo, sem pasta `api/`.

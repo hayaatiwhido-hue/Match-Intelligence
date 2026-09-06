@@ -1,9 +1,6 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "functions": {
-    "server.ts": {
-      "maxDuration": 300,
-      "includeFiles": ["node_modules/@sparticuz/chromium/**"]
-    }
-  }
+  "$schema":"https://openapi.vercel.sh/vercel.json",
+  "buildCommand":"npm install",
+  "devCommand":"npm run dev",
+  "installCommand":"npm install"
 }
